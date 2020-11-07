@@ -1,0 +1,17 @@
+{% extends 'editbase.html' %}
+
+{% block content %}
+
+
+    <form class="form-inline my-2 my-lg-0" method="POST">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="{{itemee.item}}"
+        value="{{itemee.item}}" aria-label="Search" name="item">
+
+        <input type="hidden" value="{{itemee.item}}" name="isCompleted">
+
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Edit Item <i class="fa fa-edit"></i></button>
+    </form>
+
+
+{% endblock  %}

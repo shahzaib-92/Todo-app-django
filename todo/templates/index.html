@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{message}}
+          </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+    {% if itemList %}
+
+      <table class="table table-bordered">
+        
+        <thead style="background-color: black;color: white;">
+          <tr>
+            <td><center><strong><i class="fa fa-pencil-square-o"></i> Items</strong></center></td>
+            <td><center><strong>Complete</strong></center></td>
+            <td><center><strong>Delete</strong></center></td>
+          </tr>
+        </thead>
+
+        <tbody>
+
+            {% for things in itemList %}
+                    
+              {% if things.isCompleted %}
+
+                  <tr class="table-secondary">
+                      <td style="text-decoration: line-through;"><a style="color:rgb(248, 132, 0);" href="{% url 'edit' things.id %}">{{things.item}}</a></td>
+                      <td><center><a class="btn btn-outline-success" href="{% url 'uncheck' things.id %}"><i class="fa fa-check-circle"></i> Done</a></center></td>
+                      <td><center><a class="btn btn-outline-danger" href="{% url 'delete' things.id %}"><i class="fa fa-trash-o"></i></a></center></td>
+                  </tr> 
+
+              {% else %}
+
+                  <tr>
+                      <td><a style="color:rgb(248, 132, 0);" href="{% url 'edit' things.id %}">{{things.item}}</a></td>
+                      <td><center><a class="btn btn-outline-primary" href="{% url 'check' things.id %}"><i class="fa fa-check"></i> Check</a></center></td>
+                      <td><center><a class="btn btn-outline-danger" href="{% url 'delete' things.id %}"><i class="fa fa-trash-o"></i></a></center></td>
+                  </tr> 
+
+              {% endif %}
+
+            {% endfor %}
+
+        </tbody>
+        
+
+      </table>
+
+    {% endif %}
+
+{% endblock  %}
